@@ -1,7 +1,3 @@
-//
-// Created by bartosz on 31.03.2020.
-//
-
 #include <sstream>
 #include "../inc/Vector.hh"
 #include "../inc/Matrix.hh"

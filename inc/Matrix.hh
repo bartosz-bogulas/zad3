@@ -1,6 +1,7 @@
 #ifndef ZAD3_MATRIX_HH
 #define ZAD3_MATRIX_HH
 
+#include <iostream>
 #include "Vector.hh"
 
 #define SIZE 3
