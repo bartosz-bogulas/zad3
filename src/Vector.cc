@@ -1,3 +1,4 @@
+#include <cmath>
 #include "../inc/Vector.hh"
 
 Vector::Vector(double x, double y, double z) {
@@ -8,14 +9,18 @@ Vector::Vector(double x, double y, double z) {
 
 Vector::Vector() = default;
 
-double Vector::dot(const Vector &vector1, const Vector &vector2) {
+double Vector::dot(const Vector &vector) const {
     double result = 0;
 
     for (int i = 0; i < SIZE; i++) {
-        result += vector1(i) * vector2(i);
+        result += (*this)(i) * vector(i);
     }
 
     return result;
+}
+
+double Vector::length() const {
+    return std::sqrt((*this).dot(*this));
 }
 
 Vector Vector::operator+(const Vector &vector) const {
@@ -58,11 +63,11 @@ Vector Vector::operator/(const double v) const {
     return result;
 }
 
-double Vector::operator()(int i ) const {
+double Vector::operator()(const int i ) const {
     return values[i];
 }
 
-double& Vector::operator()(int i) {
+double& Vector::operator()(const int i) {
     return values[i];
 }
 

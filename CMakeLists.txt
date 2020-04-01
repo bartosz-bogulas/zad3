@@ -3,7 +3,7 @@ project(zad3)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(zad3
-        inc/Vector.hh inc/Matrix.hh inc/LinearEquation.hh
+add_executable(
+        zad3
         src/Vector.cc src/Matrix.cc src/LinearEquation.cc
         src/main.cc)

@@ -22,7 +22,35 @@ double Matrix::det() const {
            (*this)(0, 2) * ((*this)(1, 0) * (*this)(2, 1) - (*this)(1, 1) * (*this)(2, 0));
 }
 
-Vector Matrix::operator*(Vector &vector) {
+Matrix Matrix::transpose() const {
+    Matrix result;
+
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            result(j, i) = (*this)(i, j);
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::replace_column(const Vector &vector, const int y) const {
+    Matrix result;
+
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (j != y) {
+                result(i, j) = (*this)(i, j);
+            } else {
+                result(i, j) = vector(i);
+            }
+        }
+    }
+
+    return result;
+}
+
+Vector Matrix::operator*(const Vector &vector) const {
     Vector result(0, 0, 0);
 
     for (int i = 0; i < SIZE; i++) {
@@ -34,12 +62,12 @@ Vector Matrix::operator*(Vector &vector) {
     return result;
 }
 
-double Matrix::operator()(int i, int j) const {
-    return values[i][j];
+double Matrix::operator()(const int x, const int y) const {
+    return values[x][y];
 }
 
-double& Matrix::operator()(int i, int j) {
-    return values[i][j];
+double& Matrix::operator()(const int x, const int y) {
+    return values[x][y];
 }
 
 std::istream& operator>>(std::istream& in, Matrix& matrix) {
@@ -58,10 +86,9 @@ std::ostream& operator<<(std::ostream& out, const Matrix& matrix) {
             out << matrix(i, j);
             if (j < SIZE - 1)
                 out << " ";
-            else if (i < SIZE - 1)
-                out << "\n";
-
         }
+        if (i < SIZE - 1)
+            out << "\n";
     }
 
     return out;
